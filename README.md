@@ -32,12 +32,12 @@ This code can be modified to accept regular bot tokens but that's a non-goal (ma
 
 In a nutshell, the code does this in a loop:
 
-1. Listen for messages in a specified Discord channel, filtering out self messages
-   a. If there weren't enough messages (`min_messages`) or the bot wasn't pinged, skip loop
+1. Listen for messages in a specified Discord channel, filtering out self messages.
+   1. If there weren't enough messages (`min_messages`) or the bot wasn't pinged, skip loop
 2. If we're in an existing conversation and a user mentions a keyword in `broken_keywords`, reset the state and skip loop
 3. Format messages into a standard conversational style, including the prompt if this is a new conversation
 4. Ask ChatGPT
-   a. If we receive a 429, rotate the ChatGPT client with a new token
+   1. If we receive a 429, rotate the ChatGPT client with a new token
 5. If we receive an unparsable response, reset the state and skip loop
 6. Check response for capitals or keywords in `self_awareness_keywords`; if any are true, reset the state and skip loop
 7. Send message (if `dry_run` is false)
