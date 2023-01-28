@@ -165,7 +165,9 @@ class SelfbotClient(discord.Client):
                 if self.prompted and any(
                     [keyword in ask_message for keyword in BROKEN_KEYWORDS]
                 ):
-                    print("Broken keyword detected, resetting state and sleeping (fast).")
+                    print(
+                        "Broken keyword detected, resetting state and sleeping (fast)."
+                    )
                     self.reset_state()
                     await asyncio.sleep(FAST_SLEEP_TIME)
                     continue
@@ -181,7 +183,9 @@ class SelfbotClient(discord.Client):
                 parsed_response = self.parse_response(chatgpt_response)
 
                 if parsed_response is None:
-                    print("Failed to parse response, resetting state and sleeping (fast).")
+                    print(
+                        "Failed to parse response, resetting state and sleeping (fast)."
+                    )
                     self.reset_state()
                     await asyncio.sleep(FAST_SLEEP_TIME)
                     continue
@@ -197,7 +201,8 @@ class SelfbotClient(discord.Client):
 
                 if any(kill_conditions.values()):
                     print(
-                        "Resetting state because kill condition was found, sleeping (fast)."
+                        "Resetting state because kill condition was found, sleeping (fast).",
+                        kill_conditions,
                     )
                     self.reset_state()
                     await asyncio.sleep(FAST_SLEEP_TIME)
@@ -215,6 +220,7 @@ class SelfbotClient(discord.Client):
                 await asyncio.sleep(SLEEP_TIME)
             except Exception as e:
                 print("Got an exception during the loop, swallowing.", e)
+
 
 client = SelfbotClient()
 client.run(DISCORD_TOKEN, bot=not SELF_BOT)
